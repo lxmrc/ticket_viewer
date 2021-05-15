@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "standard", "~> 1.1.1"
   spec.add_development_dependency "webmock", "~> 3.12.2"
   spec.add_development_dependency "super_diff", "~> 0.8.0"
+  spec.add_development_dependency "aruba", "~> 1.1.0"
 
   spec.add_dependency "thor", "~> 1.0"
   spec.add_dependency "httparty", "~> 0.18.1"

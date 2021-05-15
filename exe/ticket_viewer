@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "ticket_viewer"
+
+TicketViewer::CLI.start

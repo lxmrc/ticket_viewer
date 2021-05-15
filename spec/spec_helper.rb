@@ -3,6 +3,7 @@
 require "ticket_viewer"
 require "webmock/rspec"
 require "super_diff/rspec"
+require "aruba/rspec"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -14,4 +15,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include Aruba::Api
 end
