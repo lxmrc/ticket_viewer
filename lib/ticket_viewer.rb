@@ -2,8 +2,8 @@
 
 require_relative "ticket_viewer/version"
 require_relative "ticket_viewer/ticket"
+require_relative "ticket_viewer/client"
 
 module TicketViewer
   class Error < StandardError; end
-  # Your code goes here...
 end
