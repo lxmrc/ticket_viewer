@@ -1,5 +1,5 @@
 module TicketViewer
-  class Ticket 
+  class Ticket
     attr_reader :id, :subject, :description, :requester_id, :created_at
 
     def initialize(id:, subject:, description:, requester_id:, created_at:)

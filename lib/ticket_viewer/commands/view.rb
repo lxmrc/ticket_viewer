@@ -3,13 +3,21 @@ require "tty-pager"
 module TicketViewer
   class CLI < Thor
     desc "view TICKET_ID", "View ticket details"
-    def view(id)
-      data = client.get_ticket(id)
-      ticket = TicketViewer::Parser.parse_ticket(data)
+    def view(ticket_id)
+      data = fetch_ticket_data(ticket_id)
+      ticket = parse_ticket_data(data)
       print_ticket(ticket)
     end
 
     private
+
+    def fetch_ticket_data(ticket_id)
+      client.get_ticket(ticket_id)
+    end
+
+    def parse_ticket_data(data)
+      TicketViewer::Parser.parse_ticket(data)
+    end
 
     def print_ticket(ticket)
       output = <<~OUTPUT
