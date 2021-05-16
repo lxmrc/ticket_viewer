@@ -35,4 +35,22 @@ RSpec.describe TicketViewer::Client do
 
     expect(client.get_ticket(1)).to eq(ticket_json)
   end
+
+  it "raises an error if the API is unable to authenticate" do
+    stub_request(:get, "https://lxmrc.zendesk.com/api/v2/tickets/1")
+      .with(basic_auth: ["user@example.com", "password123"])
+      .to_return(status: 401)
+
+    expect { client.get_ticket(1) }.to raise_error(TicketViewer::Error,
+      /Couldn't authenticate you./)
+  end
+
+  it "raises an error if the ticket does not exist" do
+    stub_request(:get, "https://lxmrc.zendesk.com/api/v2/tickets/1")
+      .with(basic_auth: ["user@example.com", "password123"])
+      .to_return(status: 404)
+
+    expect { client.get_ticket(1) }.to raise_error(TicketViewer::Error,
+      "No ticket with that ID.")
+  end
 end

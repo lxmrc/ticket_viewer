@@ -2,4 +2,10 @@
 
 require "ticket_viewer"
 
-TicketViewer::CLI.start
+begin
+  TicketViewer::CLI.start
+rescue Timeout::Error
+  puts "Request timed out. Try again or check http://www.zendesk.com/support/system-status"
+rescue TicketViewer::Error => ex
+  puts ex.message
+end

@@ -20,7 +20,19 @@ module TicketViewer
     private
 
     def get_data(path)
-      self.class.get(path, basic_auth: @auth).body
+      response = self.class.get(path, basic_auth: @auth)
+      response.success? ? response.body : raise(TicketViewer::Error, error_message(response.code))
+    end
+
+    def error_message(code)
+      case code
+      when 401
+        "Couldn't authenticate you. Run `ticket_viewer auth` to configure your login details and try again."
+      when 404
+        "No ticket with that ID."
+      else
+        "An unknown error occurred."
+      end
     end
   end
 end
