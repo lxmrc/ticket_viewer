@@ -19,6 +19,15 @@ module TicketViewer
       puts "#{ticket.description}"
     end
 
+    desc "tickets [PAGE]", "Display a page of tickets"
+    def tickets(page_number=1)
+      setup_client
+      page = get_page(page_number)
+      page.each do |ticket|
+        puts "#{ticket.id}: #{ticket.subject}"
+      end
+    end
+
     private
 
     def prompt_username
@@ -47,6 +56,11 @@ module TicketViewer
     def get_ticket(id)
       data = @client.get_ticket(id)
       ticket = TicketViewer::Parser.parse_ticket(data)
+    end
+
+    def get_page(page_number)
+      data = @client.get_page(page_number)
+      page = TicketViewer::Parser.parse_page(data)
     end
   end
 end
