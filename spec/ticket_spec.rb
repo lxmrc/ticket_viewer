@@ -7,7 +7,7 @@ RSpec.describe TicketViewer::Ticket do
                         subject: "Example Ticket",
                         description: "This is an example ticket.",
                         requester_id: 12345,
-                        created_at: Time.parse("May 1 12:00"))
+                        created_at: "2021-05-03T22:00:32Z")
   }
 
   it "has an ID" do
@@ -27,6 +27,6 @@ RSpec.describe TicketViewer::Ticket do
   end
 
   it "has a created_at" do
-    expect(ticket.created_at).to eq(Time.parse("May 1 12:00"))
+    expect(ticket.created_at).to eq("Monday May 3 at 10:00 PM")
   end
 end
