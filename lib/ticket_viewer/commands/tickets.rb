@@ -5,12 +5,11 @@ module TicketViewer
   class CLI < Thor
     desc "tickets [PAGE]", "Display a page of tickets"
     def tickets(page_number = 1)
-      page_number = 1 if page_number.nil?
       data = fetch_page_data(page_number)
       tickets = parse_page_data(data)
 
-      @current_page = page_number.to_i
-      @total_pages = calculate_total_pages(data)
+      save_current_page(page_number)
+      save_total_pages(data)
 
       print_tickets(tickets)
       tickets_prompt
@@ -22,12 +21,16 @@ module TicketViewer
       client.get_tickets(page_number)
     end
 
-    def calculate_total_pages(data)
-      TicketViewer::Parser.calculate_total_pages(data)
-    end
-
     def parse_page_data(data)
       TicketViewer::Parser.parse_page(data)
+    end
+
+    def save_current_page(page_number)
+      @current_page = page_number.to_i
+    end
+
+    def save_total_pages(data)
+      @total_pages ||= TicketViewer::Parser.calculate_total_pages(data)
     end
 
     def print_tickets(tickets)
@@ -60,8 +63,7 @@ module TicketViewer
     end
 
     def view_ticket
-      id = TTY::Prompt.new.ask("Ticket ID:")
-      view(id)
+      view(TTY::Prompt.new.ask("Ticket ID:"))
     end
   end
 end

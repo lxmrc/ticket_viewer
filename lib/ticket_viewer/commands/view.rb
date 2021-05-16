@@ -41,7 +41,7 @@ module TicketViewer
 
     def view_prompt
       TTY::Prompt.new.select("Navigate:") do |menu|
-        menu.choice "Back to tickets", -> { tickets(@current_page) }
+        menu.choice "Back to tickets", -> { tickets(@current_page || 1) }
         menu.choice "Exit"
       end
     end
