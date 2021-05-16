@@ -1,5 +1,8 @@
 require "thor"
 require "netrc"
+require "tty-pager"
+require "tty-table"
+require "tty-prompt"
 
 require_relative "./commands/auth"
 require_relative "./commands/view"

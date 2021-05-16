@@ -1,6 +1,3 @@
-require "tty-table"
-require "tty-prompt"
-
 module TicketViewer
   class CLI < Thor
     desc "tickets [PAGE]", "Display a page of tickets"

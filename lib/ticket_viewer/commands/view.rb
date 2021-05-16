@@ -1,5 +1,3 @@
-require "tty-pager"
-
 module TicketViewer
   class CLI < Thor
     desc "view TICKET_ID", "View ticket details"
