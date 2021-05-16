@@ -1,5 +1,3 @@
-require "netrc"
-
 module TicketViewer
   class CLI < Thor
     desc "auth", "Configure Zendesk API credentials"

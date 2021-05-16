@@ -1,4 +1,5 @@
 require "thor"
+require "netrc"
 
 require_relative "./commands/auth"
 require_relative "./commands/view"
