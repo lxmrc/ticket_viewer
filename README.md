@@ -10,7 +10,7 @@ Ticket viewer CLI for the Zendesk coding challenge. The requirements were to bui
  - Handle the API being unavailable
  - Handle basic errors
 
-## Prerequisites
+## Dependencies
 
 - Ruby
 
@@ -38,7 +38,7 @@ Run `bundle exec ticket_viewer [command]` from within the directory.
 3. Use the interactive prompt to navigate between pages. Alternatively, view a specific page with `bundle exec ticket_viewer tickets PAGE_NUMBER`.
 4. Use the interactive prompt to view a specific ticket. Alternatively, view a specific ticket with `bundle exec ticket_viewer view TICKET_ID`.
 
-## Design decisions
+## Design choices
 
 ### Authentication
 
@@ -78,6 +78,15 @@ I used [Thor](https://github.com/erikhuda/thor) to implement the basic command l
 
 ### Testing
 
-I had read before that it was a best practice to stub external services in tests so I used [Webmock](https://github.com/bblimke/webmock) to accomplish this.
+[I had read that it was a best practice to stub external services in tests](https://thoughtbot.com/blog/how-to-stub-external-services-in-tests) so I used [Webmock](https://github.com/bblimke/webmock) to achieve this.
 
 I wrote basic happy path tests for `Parser` and `Client`, and for `Client` I also wrote tests for the two unhappy paths I mentioned above. I also wrote some basic unit tests for `Ticket`.
+
+## Useful resources
+
+Some of the articles/blog posts/tutorials I found helpful in completing the challenge:
+
+- [How to create a Ruby gem with Bundler](https://bundler.io/guides/creating_gem.html)
+- [4 Ways to Parse a JSON API with Ruby](https://www.twilio.com/blog/2015/10/4-ways-to-parse-a-json-api-with-ruby.html)
+- [How to Stub External Services in Tests](https://thoughtbot.com/blog/how-to-stub-external-services-in-tests)
+- [Making a command line utility with gems and Thor](https://willschenk.com/articles/2014/making-a-command-line-utility-with-gems-and-thor/)
