@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "httparty", "~> 0.18.1"
   spec.add_dependency "netrc", "~> 0.11.0"
   spec.add_dependency "tty-table", "~> 0.12"
+  spec.add_dependency "tty-pager", "~> 0.14"
 end
