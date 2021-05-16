@@ -13,17 +13,17 @@ module TicketViewer
 
     desc "view TICKET_ID", "View ticket details"
     def view(id)
-      setup_client
-      ticket = get_ticket(id)
+      data = client.get_ticket(id)
+      ticket = TicketViewer::Parser.parse_ticket(data)
       puts "#{ticket.subject}"
       puts "#{ticket.description}"
     end
 
     desc "tickets [PAGE]", "Display a page of tickets"
     def tickets(page_number=1)
-      setup_client
-      page = get_page(page_number)
-      page.each do |ticket|
+      data = client.get_tickets(page_number)
+      tickets = TicketViewer::Parser.parse_page(data)
+      tickets.each do |ticket|
         puts "#{ticket.id}: #{ticket.subject}"
       end
     end
@@ -38,29 +38,15 @@ module TicketViewer
       ask("Password:", echo: false)
     end
 
-    def check_auth
-      abort "No login found. Run 'ticket_viewer auth' to setup login details." if Netrc.read["lxmrc.zendesk.com"].nil?
-    end
-
     def read_auth
       auth = Netrc.read["lxmrc.zendesk.com"].to_h
       auth[:username] = auth.delete(:login)
       auth
     end
 
-    def setup_client
-      check_auth
+    def client
+      abort "No login found. Run 'ticket_viewer auth' to setup login details." if Netrc.read["lxmrc.zendesk.com"].nil?
       @client ||= TicketViewer::Client.new(read_auth)
-    end
-
-    def get_ticket(id)
-      data = @client.get_ticket(id)
-      ticket = TicketViewer::Parser.parse_ticket(data)
-    end
-
-    def get_page(page_number)
-      data = @client.get_page(page_number)
-      page = TicketViewer::Parser.parse_page(data)
     end
   end
 end

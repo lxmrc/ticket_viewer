@@ -17,7 +17,7 @@ RSpec.describe TicketViewer::Client do
       .with(basic_auth: ["user@example.com", "password123"])
       .to_return(status: 200, body: page_1_json)
 
-    expect(client.get_page(1)).to eq(page_1_json)
+    expect(client.get_tickets(1)).to eq(page_1_json)
   end
 
   it "can get the next page of tickets" do
@@ -25,7 +25,7 @@ RSpec.describe TicketViewer::Client do
       .with(basic_auth: ["user@example.com", "password123"])
       .to_return(status: 200, body: page_2_json)
 
-    expect(client.get_page(2)).to eq(page_2_json)
+    expect(client.get_tickets(2)).to eq(page_2_json)
   end
 
   it "can get a specific ticket" do

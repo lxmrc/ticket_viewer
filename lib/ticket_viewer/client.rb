@@ -9,7 +9,7 @@ module TicketViewer
       @auth = auth
     end
 
-    def get_page(page_number)
+    def get_tickets(page_number)
       get_data("/tickets.json?page=#{page_number}&per_page=25")
     end
 
