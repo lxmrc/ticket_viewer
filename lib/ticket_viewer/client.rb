@@ -5,8 +5,8 @@ module TicketViewer
     include HTTParty
     base_uri "https://lxmrc.zendesk.com/api/v2"
 
-    def initialize(username:, password:)
-      @auth = {username: username, password: password}
+    def initialize(auth)
+      @auth = auth
     end
 
     def get_page(page_number)
@@ -20,7 +20,7 @@ module TicketViewer
     private
 
     def get_data(path)
-      self.class.get(path, basic_auth: @auth).parsed_response
+      self.class.get(path, basic_auth: @auth).body
     end
   end
 end
